@@ -8,6 +8,10 @@
 	
 
     <!-- Chart.js scripts -->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0"></script>
+	
+
+	
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="js/chartjs-plugin-colorschemes.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
@@ -18,6 +22,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vue-select@latest"></script>
     <link rel="stylesheet" href="https://unpkg.com/vue-select@latest/dist/vue-select.css">
+	
 
 
     <!-- Bootstrap scripts -->
@@ -27,7 +32,7 @@
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
-<body>
+<body >
     <div class="container-fluid app" id="app">
         <div class="row fixed-top">
             <div class="col-md-12 csv-header">
@@ -49,12 +54,26 @@
                         <div class="collapse show item-1" role="tabpanel" data-parent="#accordion-1">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="myfile">Select a CSV file:</label><br>
-                                    <input type="file" id="myfile" name="myfile" class="file-select" accept="text/csv"  src="r.csv">
+								<p>Select relavent exam:</p>
+								<select>
+                                <option value="" disabled="disabled" selected="selected">Available data</option>
+                                <option value="1">2</option>
+                                <option value="2"></option>
+								<option value="3"></option>
+								<option value="4"></option>
+								
+								
+                                </select>
+								
+                                    
+
                                     									
 									
                                     <button @click="load() " class="btn btn-success btn-sm">Configure</button>
-									<button @click="selected = Array.from(header); render()" class="btn btn-success btn-sm">visualize</button>
+									<button @click="selected = Array.from(header); render()" class="btn btn-success btn-sm">visualize</button> 
+									
+									
+									
                                     <br><br>
                                     Get a sample CSV <a href="examples/sample.csv">here</a> or <a href="examples/scatter.csv">here for scatter diagram</a>
                                     <hr>
@@ -122,7 +141,8 @@
                                 
                                 <div><br>
                                     Switch row / column:
-                                    <button @click="transpose()" class="btn btn-light-alt btn-sm" id="Transpose">Transpose</button>
+                                    <button @click="transpose()" class="btn btn-light-alt btn-sm" id="Transpose">Filter temp data</button>
+									<canvas id="myChart" width="10" height="6"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -224,17 +244,25 @@
                                 </span>
                             </span>
                         </div>
+						
                         <div v-else class="remind-text">
                             Choose a csv file and select data series.
                         </div>
                         <canvas id="csv-chart"></canvas>
                         <div v-if="rendered">
                             <h5 class="export-title">
-                                <i class="fas fa-file-export"></i> Export Chart
+                                <i class="fas fa-file-export"></i> 
+								
+								
+								<button @click="transpose()" class="btn btn-light-alt btn-sm" id="Transpose">Filter temp data</button>
+								
+								
+								<canvas id="mychart" width="10" height="6"></canvas>
                             </h5>
                             <div>
                                 <button type="button" class="btn btn-primary btn-sm mb-1" data-toggle="modal" data-target="#exportModal" @click="render(true, true)">HTML</button>
-                                <a onclick="saveImage()" class="btn btn-light-alt btn-sm mb-1">PNG (Transparent)</a>
+                                <a onclick="test()" class="btn btn-light-alt btn-sm mb-1">emotion</a>
+								<canvas id="mychart2" width="10" height="6"></canvas>
                                 <a onclick="saveJpeg()" class="btn btn-light-alt btn-sm mb-1">JPEG (White Background)</a>
                             </div>
                         </div>
@@ -309,6 +337,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
 
     <script src="./index.js"></script>
+	
+	
 </body>
-
+<canvas id="myChart" width="10" height="6"></canvas>
 </html>

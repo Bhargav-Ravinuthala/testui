@@ -76,6 +76,10 @@ var app = new Vue({
       zoomY: false,
     }
   },
+  
+	
+
+
   methods: {
     /**
      * Loads and parses csv file.
@@ -98,20 +102,23 @@ var app = new Vue({
       console.log(`Will read ${ readRange.numCols > 0 ? 'first ' + readRange.numCols : 'all'} columns and ${ readRange.numRows > 0 ? 'first ' + readRange.numRows : 'all'} rows.`);
       this.fileReadRange = readRange.col + (readRange.numRows > 0 ? readRange.numRows : '');
 	  
-	  const myfilec = "r3.csv"
+	  const myfilec = "https://bucket-11july2022.s3.us-east-2.amazonaws.com/r3.csv'"
+	  
   
 	  
 	 
 	  
-	  
+	  /**
       const selectedFile = document.getElementById('myfile').files[0];
-	  
+	  const selectedFilecc = document.getElementById("myfile").href = "https://bucket-11july2022.s3.us-east-2.amazonaws.com/r3.csv'";
+	  /*
 	  
 
 	  
-      console.log(selectedFile.name);
+      
       this.fileName = selectedFile.name;
-      Papa.parse('https://bucket-11july2022.s3.us-east-2.amazonaws.com/r3.csv', {
+	  */
+      Papa.parse('https://bucket-11july-01.s3.us-east-2.amazonaws.com/r.csv', {
         skipEmptyLines: true,
 		download: true,
         preview: readRange.numRows > 0 ? readRange.numRows : 0,
@@ -127,6 +134,9 @@ var app = new Vue({
         }
       });
     },
+	
+	
+		
     
     /**
      * Renders chart.
@@ -221,6 +231,20 @@ var app = new Vue({
     this.chart = new Chart(ctx, chartConfig);
 	window.doc = this.chart
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
       
     },
@@ -281,7 +305,7 @@ var app = new Vue({
      * Transposes csv table.
      */
 	
-    transpose() {
+    transposex() {
       if (!this.completed) return;
       this.raw = this.raw[0].map((x,i) => this.raw.map(x => x[i]));
       this.header = Array.from(this.raw[0]); // problem: duplicated / null headers
@@ -289,6 +313,72 @@ var app = new Vue({
       this.selected = [];
       this.refreshPreview();
     },
+	transpose2() {
+	
+	  
+	 const threshold = 97.5;
+
+    new Chart('mychart3', {
+      type: 'line',
+      plugins: [{
+        afterLayout: chart => {
+          let ctx = chart.chart.ctx;
+          ctx.save();
+          let yAxis = chart.scales["y-axis-0"];
+          let yThreshold = yAxis.getPixelForValue(threshold);          
+          let gradient = ctx.createLinearGradient(0, yAxis.top, 0, yAxis.bottom);   
+          gradient.addColorStop(0, 'green'); 
+          let offset = 1 / yAxis.bottom * yThreshold; 
+          gradient.addColorStop(offset, 'green'); 
+          gradient.addColorStop(offset, 'red'); 
+          gradient.addColorStop(1, 'red');           
+          chart.data.datasets[0].borderColor = gradient;
+          ctx.restore();
+        }
+      }],
+      data: {
+        labels: ['1', '2', '3', '4', '5', '6','7', '8', '9','10', '11', '12','13', '14', '15','16', '17', '18','19', '20', '21','22', '23'],
+        datasets: [{
+          label: 'My Dataset',
+          data: [0,0,0,5,5,5,5,-1,5,0,-1,0,5,5,-1,5,0,-1,0,5,5,-1,5,0,-1,0,5,5,-1,5,0,-1,0,5],
+          fill: false
+        }]
+      },
+      options: {
+        legend: {
+          display: false
+        }
+      }
+    });
+    },
+  
+
+
+transpose() {
+	const options = {
+	  type: 'line',
+	  data: {
+		labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+		datasets: [{
+		  label: '# of Votes',
+		  data: [12, 19, 3, 5, 2, 3],
+		  segment: {
+			borderColor: (ctx) => (ctx.p0.parsed.y < ctx.p1.parsed.y ? 'green' : 'red')
+		  }
+		}]
+	  },
+	  options: {}
+	}
+
+	const ctx = document.getElementById('mychart').getContext('2d');
+	new Chart(ctx, options);
+},
+
+	
+
+	
+	
+	
     
     /**
      * Updates the chart options available for the specified chart type.
@@ -325,6 +415,7 @@ var app = new Vue({
       if (numCols <= 0) return;
       this.raw = this.raw.map(row => row.slice(0, numCols));
     },
+	
 
     /**
      * Returns the number of rows and columns from A1 to the target address.
@@ -364,18 +455,39 @@ var app = new Vue({
 	}
     },
 
+	
+	
+	
+
   mounted() {
     this.updateChartType(false);
   }
-  
+ 
    
 }
 
+	
 
 
 )
 
 console.log('done')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 var canvas = document.getElementById("csv-chart");
 canvas.onclick = function(evt) {
@@ -396,15 +508,55 @@ canvas.onclick = function(evt) {
 		  }
 	  };
 
-function saveImage() {
-  let canvas = document.getElementById("csv-chart");
-  let image = canvas.toDataURL(`image/png`).replace(`image/png`, "image/octet-stream");
-  window.location.href = image;
-}
 
 
 
-	 
+function test(){
+		const threshold = 0;
+
+		new Chart('mychart2', {
+		  type: 'line',
+		  plugins: [{
+			afterLayout: chart => {
+			  let ctx = chart.chart.ctx;
+			  ctx.save();
+			  let yAxis = chart.scales["y-axis-0"];
+			  let yThreshold = yAxis.getPixelForValue(threshold);          
+			  let gradient = ctx.createLinearGradient(0, yAxis.top, 0, yAxis.bottom);   
+			  gradient.addColorStop(0, 'green'); 
+			  let offset = 1 / yAxis.bottom * yThreshold; 
+			  gradient.addColorStop(offset, 'green'); 
+			  gradient.addColorStop(offset, 'red'); 
+			  gradient.addColorStop(1, 'red');           
+			  chart.data.datasets[0].borderColor = gradient;
+			  ctx.restore();
+			}
+		  }],
+		  data: {
+			labels: ['1', '2', '3', '4', '5', '6','7', '8', '9','10', '11', '12','13', '14', '15','16', '17', '18','19', '20', '21','22', '23'],
+			datasets: [{
+			  label: 'My Dataset',
+			  data: [0,0,0,5,5,5,5,-5,5,0,-5,0,5,5,-5,5,0,-5,0,5,5,-5,5,0,-5,0,5,5,-5,5,0,-5,0,5],
+			  fill: false
+			}]
+		  },
+		  options: {
+			legend: {
+			  display: false
+			}
+		  }
+		});
+		
+		
+		
+	}
+
+
+
+
+
+
+
 
 
 

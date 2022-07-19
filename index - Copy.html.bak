@@ -8,10 +8,6 @@
 	
 
     <!-- Chart.js scripts -->
-	<script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0"></script>
-	
-
-	
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="js/chartjs-plugin-colorschemes.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
@@ -22,7 +18,6 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vue-select@latest"></script>
     <link rel="stylesheet" href="https://unpkg.com/vue-select@latest/dist/vue-select.css">
-	
 
 
     <!-- Bootstrap scripts -->
@@ -141,8 +136,7 @@
                                 
                                 <div><br>
                                     Switch row / column:
-                                    <button @click="transpose()" class="btn btn-light-alt btn-sm" id="Transpose">Filter temp data</button>
-									<canvas id="myChart" width="10" height="6"></canvas>
+                                    <button @click="transpose()" class="btn btn-light-alt btn-sm" id="Transpose">Transpose</button>
                                 </div>
                             </div>
                         </div>
@@ -198,18 +192,18 @@
                 </div>
 				<video id="myVideo" width="500" height="300" controls>
   
-				  <source src="2/video.ogv" type="video/mp4" >
+				  <source src="v1()" type="video/mp4" >
 				  Your browser does not support HTML5 video.
 				</video>
 				
 				<video id="myVideo1" width="500" height="300" controls>
   
-				  <source src="2/video1.ogv" type="video/mp4" >
+				  <source src="v2()" type="video/mp4" >
 				  Your browser does not support HTML5 video.
 				</video>
-				<video id="myVideo2" width="500" height="300" controls>
+				<video id="myVideo2()" width="500" height="300" controls>
   
-				  <source src="2/out.ogv" type="video/mp4" >
+				  <source src="v3()" type="video/mp4" >
 				  Your browser does not support HTML5 video.
 				</video>
 
@@ -244,26 +238,18 @@
                                 </span>
                             </span>
                         </div>
-						
                         <div v-else class="remind-text">
                             Choose a csv file and select data series.
                         </div>
                         <canvas id="csv-chart"></canvas>
                         <div v-if="rendered">
                             <h5 class="export-title">
-                                <i class="fas fa-file-export"></i> 
-								
-								
-								<button @click="transpose()" class="btn btn-light-alt btn-sm" id="Transpose">Filter temp data</button>
-								
-								
-								<canvas id="mychart" width="10" height="6"></canvas>
+                                <i class="fas fa-file-export"></i> Export Chart
                             </h5>
                             <div>
-                                <button type="button" class="btn btn-primary btn-sm mb-1" data-toggle="modal" data-target="#exportModal" @click="render(true, true)">/</button>
-                                <a onclick="test()" class="btn btn-light-alt btn-sm mb-1">Filter emotion data</a>
-								<canvas id="mychart2" width="10" height="6"></canvas>
-                                <a onclick="saveJpeg()" class="btn btn-light-alt btn-sm mb-1">/</a>
+                                <button type="button" class="btn btn-primary btn-sm mb-1" data-toggle="modal" data-target="#exportModal" @click="render(true, true)">HTML</button>
+                                <a onclick="saveImage()" class="btn btn-light-alt btn-sm mb-1">PNG (Transparent)</a>
+                                <a onclick="saveJpeg()" class="btn btn-light-alt btn-sm mb-1">JPEG (White Background)</a>
                             </div>
                         </div>
                     </div>
@@ -337,8 +323,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
 
     <script src="./index.js"></script>
-	
-	
 </body>
-<canvas id="myChart" width="10" height="6"></canvas>
+
 </html>
